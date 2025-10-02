@@ -1112,22 +1112,26 @@
             }, 3000);
         }
 
-        // Send withdrawal request to admin via Telegram bot
-        function sendWithdrawRequestToAdmin(message) {
-            // Telegram API URL তৈরি করুন
-            const apiUrl = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${ADMIN_CHAT_ID}&text=${encodeURIComponent(message)}`;
-            
-            fetch(apiUrl)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.ok) {
-                        console.log('উত্তোলন অনুরোধ অ্যাডমিন에게 পাঠানো হয়েছে');
-                    } else {
-                        console.error('উত্তোলন অনুরোধ পাঠানো যায়নি:', data);
-                    }
-                })
-                .catch(error => console.error('মেসেজ পাঠাতে ত্রুটি:', error));
-        }
+        // Bot Token এবং Admin Chat ID ঠিকভাবে সংরক্ষণ করুন
+const BOT_TOKEN = "8229572222:AAF2L8PLNSsZNz3fL57xWaHrc0RmlU8HGto";
+const ADMIN_CHAT_ID = "8447738298";
+
+// উত্তোলন অনুরোধ অ্যাডমিনকে পাঠানোর ফাংশন
+function sendWithdrawRequestToAdmin(message) {
+    // Telegram API URL তৈরি করুন
+    const apiUrl = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${ADMIN_CHAT_ID}&text=${encodeURIComponent(message)}`;
+    
+    fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+            if (data.ok) {
+                console.log('উত্তোলন অনুরোধ অ্যাডমিনকে পাঠানো হয়েছে');
+            } else {
+                console.error('উত্তোলন অনুরোধ পাঠানো যায়নি:', data.description);
+            }
+        })
+        .catch(error => console.error('মেসেজ পাঠাতে ত্রুটি:', error));
+}
 
         // Show notification
         function showNotification(message, type) {
@@ -1148,6 +1152,7 @@
     </script>
 </body>
 </html>
+
 
 
 
